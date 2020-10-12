@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace CDICollegeATMMachine
 {
@@ -16,8 +18,16 @@ namespace CDICollegeATMMachine
         {
             InitializeComponent();
         }
-
+        ATMManager atmManger;
+        private int pinNumber;
+        private double amount;
+        private Boolean readAccounts;
         private int attempt;
+
+        public void readCustomres()
+        {
+            var file = File.ReadAllLines("C:\\Users\\Farzad\\source\\repos\\CDICollegeATMMachine");
+        }
 
         private void Button1_Click(object sender, EventArgs e)
         {

@@ -16,7 +16,15 @@ namespace CDICollegeATMMachine
         {
             InitializeComponent();
         }
+        ATMManager atmManager;
+        private string user;
+        private int pin;
+        private int counter;
 
+        public void InputNumber(String number)
+        {
+
+        }
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
