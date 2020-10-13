@@ -72,7 +72,7 @@ namespace CDICollegeATMMachine {
         public Boolean payBill(string pin, double amount) {
             foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
                 if (each.getPinNumber() == pin) {
-                    each.setAccountBalance(each.getAccountBalance() - amount);
+                    each.setAccountBalance(each.getAccountBalance() - amount - 1.25);
 
                     return true;
                 }

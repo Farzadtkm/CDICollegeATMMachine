@@ -248,6 +248,7 @@
             this.TransferFundsRadio.TabStop = true;
             this.TransferFundsRadio.Text = "Transfer Funds";
             this.TransferFundsRadio.UseVisualStyleBackColor = true;
+            this.TransferFundsRadio.CheckedChanged += new System.EventHandler(this.TransferFundsRadio_CheckedChanged);
             // 
             // WithdrawalRadio
             // 

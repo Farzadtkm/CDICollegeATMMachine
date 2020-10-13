@@ -106,19 +106,20 @@ namespace CDICollegeATMMachine {
             if(SavingRadio.Checked == true && DepositRadio.Checked == true) {
                 atmManager.depositSavings(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
             }
+            
 
-            if(CheckingRadio.Checked == true && WithdrawalRadio.Checked == true) { 
-                if(Convert.ToDouble(KeyPadTxt.Text) > 1000)
-                    MessageBox.Show("The amount is more than a thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if(Convert.ToDouble(KeyPadTxt.Text) < 0)
-                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if(Convert.ToDouble(KeyPadTxt.Text) % 10 > 0)
-                    MessageBox.Show("The amount should be multiples of 10", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else if(userChecking.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
-                    MessageBox.Show("The amount cannot be more than the amount in the account", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    atmManager.withdrawChecking(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
-            }
+            //    if (CheckingRadio.Checked == true && WithdrawalRadio.Checked == true) { 
+            //    if(Convert.ToDouble(KeyPadTxt.Text) > 1000)
+            //        MessageBox.Show("The amount is more than a thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    else if(Convert.ToDouble(KeyPadTxt.Text) < 0)
+            //        MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    else if(Convert.ToDouble(KeyPadTxt.Text) % 10 > 0)
+            //        MessageBox.Show("The amount should be multiples of 10", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    else if(userChecking.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
+            //        MessageBox.Show("The amount cannot be more than the amount in the account", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    else
+            //        atmManager.withdrawChecking(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            //}
 
             if (SavingRadio.Checked == true && WithdrawalRadio.Checked == true) {
                 if (Convert.ToDouble(KeyPadTxt.Text) > 1000)
@@ -133,7 +134,21 @@ namespace CDICollegeATMMachine {
                     atmManager.withdrawSavings(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
             }
 
-            atmManager.WriteAccounts();
+            if (CheckingRadio.Checked == true && PayBillRadio.Checked == true) {
+                if (Convert.ToDouble(KeyPadTxt.Text) > 10000)
+                    MessageBox.Show("The amount is more than a ten thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (userChecking.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text) + 1.25)
+                    MessageBox.Show("The amount cannot be more than the amount in the account with $1.25 considered.", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    atmManager.payBill(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            }
+
+            if (SavingRadio.Checked == true && PayBillRadio.Checked == true) {
+                MessageBox.Show("Paying a bill is only available from checking", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+                atmManager.WriteAccounts();
         }
 
         private void CheckingRadio_CheckedChanged(object sender, EventArgs e) {
@@ -164,6 +179,11 @@ namespace CDICollegeATMMachine {
 
         private void WithdrawalRadio_CheckedChanged(object sender, EventArgs e) {
 
+        }
+
+
+        private void TransferFundsRadio_CheckedChanged(object sender, EventArgs e) {
+            
         }
 
         //private void MainMenu_Load(object sender, System.EventArgs e) {
