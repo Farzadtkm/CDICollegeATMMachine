@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace CDICollegeATMMachine
 {
-    class CheckingAccounts
-    {
+    public class CheckingAccounts {
+
+        private List<Checking> allCheckingAccounts = new List<Checking>();
+        
+        public void addChecking(Checking aCheckingAccount) {
+            allCheckingAccounts.Add(aCheckingAccount);
+        }
+
+        public Checking getChecking(int index) {
+            return allCheckingAccounts.ElementAt(index);
+        }
+
+        public List<Checking> getAllCheckingAccounts() {
+            return allCheckingAccounts;
+        }
+
     }
 }

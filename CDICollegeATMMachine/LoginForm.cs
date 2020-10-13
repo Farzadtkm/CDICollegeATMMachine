@@ -12,9 +12,7 @@ using System.IO;
 
 namespace CDICollegeATMMachine {
     public partial class SignInForm : Form {
-        public SignInForm() {
-            InitializeComponent();
-        }
+
         ATMManager atmManger;
         private string pinNumber;
         private double amount;
@@ -23,7 +21,9 @@ namespace CDICollegeATMMachine {
         public static String user;
         public static String pass;
 
-        
+        public SignInForm() {
+            InitializeComponent();
+        }
 
 
         private void Button1_Click(object sender, EventArgs e) {
@@ -74,20 +74,20 @@ namespace CDICollegeATMMachine {
         private void LogIn_Click(object sender, EventArgs e) {
 
             ATMManager atmManager = new ATMManager();
-            List<Customer> loadedCustomers = atmManager.readCustomrs();
 
             user = UserNameTxt.Text;
             pass = Passwordtxt.Text;
 
-            #region login check
-            foreach (Customer customerItem in loadedCustomers) {
-                if (customerItem.getName().Equals(user) && customerItem.getPinNumber().Equals(pass.Trim())){
-                    this.Hide();
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    return;
-                }
+            atmManager.readAccounts();
+            atmManager.readCustomers();
+
+            if (atmManager.validateUser(user, pass)) {
+                this.Hide();
+                MainMenu mainMenu = new MainMenu(user, pass, atmManager);
+                mainMenu.Show();
+                return;
             }
+            
             attempt++;
             if (attempt < 3) {
                 MessageBox.Show("The User Name or PIN is Inccorect you have " + (3 - attempt) + " attempt more");
@@ -95,7 +95,6 @@ namespace CDICollegeATMMachine {
                 MessageBox.Show("Your session has been terminated", "Wrong Inputs", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            #endregion
 
 
 

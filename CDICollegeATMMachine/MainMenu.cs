@@ -9,121 +9,177 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace CDICollegeATMMachine
-{
-    public partial class MainMenu : Form
-    {
-
-        public MainMenu()
-        {
-            InitializeComponent();
-        }
+namespace CDICollegeATMMachine {
+    public partial class MainMenu : Form {
 
         ATMManager atmManager;
         private string user;
         private string pinNumber;
         private int counter;
-        private string[,] accounts = new string[11, 4];
+        private Checking userChecking;
+        private Savings userSaving;
 
-        
-        
+        public MainMenu(string user, string pass, ATMManager atmManager) {
+            InitializeComponent();
+
+            this.user = user;
+            this.pinNumber = pass;
+            this.atmManager = atmManager;
+
+            FullName.Text = user;
+
+            foreach (Checking each in atmManager.getCheckingAccount().getAllCheckingAccounts()) {
+                if (pinNumber == each.getPinNumber())
+                    this.userChecking = each;
+            }
+
+            foreach (Savings each in atmManager.getSavingAccounts().getAllSavingAccounts()) {
+                if (pinNumber == each.getPinNumber())
+                    this.userSaving = each;
+            }
+
+        }
+
         public void readAccoounts() {
 
-            try {
-                String[] lines = File.ReadAllLines("C:\\Users\\Farzad\\source\\repos\\CDICollegeATMMachine\\Accounts.txt");
-
-                for (int i = 0; i < 11; i++) {
-                    String[] each = lines[i].Split(',');
-
-                    for (int j = 0; j < 4; j++) {
-                        accounts[i, j] = each[j];
-                    }
-                }
-
-            } catch (IOException e) {
-                Console.Write("There was an error when loading the file");
-            }
-
-            for (int i = 0; i < 11; i++) {
-                for (int j = 0; j < 4; j++) {
-                    Console.Write(accounts[i, j]);
-                }
-                Console.WriteLine();
-            }
         }
 
-        public void InputNumber(String number)
-        {
+        public void InputNumber(String number) {
 
         }
-        private void CloseButton_Click(object sender, EventArgs e)
-        {
+        private void CloseButton_Click(object sender, EventArgs e) {
             this.Close();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
+        private void Button1_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "1";
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "2";
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
+        private void button5_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "3";
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+        private void button2_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "4";
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
+        private void button6_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "5";
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
+        private void button9_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "6";
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+        private void button4_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "7";
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
+        private void button7_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "8";
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
+        private void button8_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "9";
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
+        private void button10_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "0";
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
+        private void button11_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + ".";
         }
 
         private void SubmitButton_Click(object sender, EventArgs e) {
-            
+
+
+
+            if(CheckingRadio.Checked == true && DepositRadio.Checked == true) {
+                atmManager.depositChecking(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            }
+
+            if(SavingRadio.Checked == true && DepositRadio.Checked == true) {
+                atmManager.depositSavings(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            }
+
+            if(CheckingRadio.Checked == true && WithdrawalRadio.Checked == true) { 
+                if(Convert.ToDouble(KeyPadTxt.Text) > 1000)
+                    MessageBox.Show("The amount is more than a thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if(Convert.ToDouble(KeyPadTxt.Text) < 0)
+                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if(Convert.ToDouble(KeyPadTxt.Text) % 10 > 0)
+                    MessageBox.Show("The amount should be multiples of 10", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if(userChecking.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
+                    MessageBox.Show("The amount cannot be more than the amount in the account", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    atmManager.withdrawChecking(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            }
+
+            if (SavingRadio.Checked == true && WithdrawalRadio.Checked == true) {
+                if (Convert.ToDouble(KeyPadTxt.Text) > 1000)
+                    MessageBox.Show("The amount is more than a thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(KeyPadTxt.Text) % 10 > 0)
+                    MessageBox.Show("The amount should be multiples of 10", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (userSaving.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
+                    MessageBox.Show("The amount cannot be more than the amount in the account", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    atmManager.withdrawSavings(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
+            }
+
+            atmManager.WriteAccounts();
         }
 
         private void CheckingRadio_CheckedChanged(object sender, EventArgs e) {
-            if(CheckingRadio.Checked == true) {
-                
+            if (CheckingRadio.Checked == true) {
+                Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
+
+                //foreach(Checking each in atmManager.getCheckingAccount().getAllCheckingAccounts()) {
+                //    if (pinNumber == each.getPinNumber())
+                //        Checkingtxt.Text = Convert.ToString(each.getAccountBalance());
+                //}
+            }          
+        }
+
+        private void DepositRadio_CheckedChanged(object sender, EventArgs e) {
+            
+        }
+
+        private void SavingRadio_CheckedChanged(object sender, EventArgs e) {
+            if (SavingRadio.Checked == true) {
+                Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
+
+                //foreach (Savings each in atmManager.getSavingAccounts().getAllSavingAccounts()) {
+                //    if (pinNumber == each.getPinNumber())
+                //        Savingtxt.Text = Convert.ToString(each.getAccountBalance());
+                //}
             }
         }
+
+        private void WithdrawalRadio_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+        //private void MainMenu_Load(object sender, System.EventArgs e) {
+        //    if (CheckingRadio.Checked == true) {
+        //        foreach (Checking each in atmManager.getCheckingAccount().getAllCheckingAccounts()) {
+        //            if (pinNumber == each.getPinNumber())
+        //                Checkingtxt.Text = Convert.ToString(each.getAccountBalance());
+        //        }
+        //    }
+
+        //    if (SavingRadio.Checked == true) {
+        //        foreach (Savings each in atmManager.getSavingAccounts().getAllSavingAccounts()) {
+        //            if (pinNumber == each.getPinNumber())
+        //                Savingtxt.Text = Convert.ToString(each.getAccountBalance());
+        //        }
+        //    }
+        //}
     }
 }

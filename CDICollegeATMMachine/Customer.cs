@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CDICollegeATMMachine
-{
-    class Customer
-    {
+namespace CDICollegeATMMachine {
+    public class Customer {
 
         private string name;
         private string pinNumber;
@@ -18,12 +16,10 @@ namespace CDICollegeATMMachine
         public void setPinNumber(string pinNumber) {
             this.pinNumber = pinNumber;
         }
-        public string getName()
-        {
+        public string getName() {
             return this.name;
         }
-        public string getPinNumber()
-        {
+        public string getPinNumber() {
             return this.pinNumber;
         }
     }

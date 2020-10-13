@@ -5,20 +5,90 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace CDICollegeATMMachine
-{
-    class ATMManager
-    {
+namespace CDICollegeATMMachine {
+    public class ATMManager {
 
-        Bank bank;
-        Customers customers;
-        SavingAccounts savingAccounts;
-        CheckingAccounts checkingAccounts;
+        private Bank bank;
+        private Customers customers = new Customers();
+        private SavingAccounts savingAccounts = new SavingAccounts();
+        private CheckingAccounts checkingAccounts = new CheckingAccounts();
 
         private double currentBalance;
 
-        public List<Customer> readCustomrs() {
-            List<Customer> customerList = new List<Customer>();
+        public Boolean validateUser(string name, string pin) {
+            
+            for(int i = 0; i < 5; i++) {
+                if (customers.getCustomer(i).getName().Equals(name) && customers.getCustomer(i).getPinNumber().Equals(pin.Trim())) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public Boolean withdrawChecking(string pin, double amount) {
+            foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                if (each.getPinNumber() == pin) {
+                    each.setAccountBalance(each.getAccountBalance() - amount);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public Boolean withdrawSavings(string pin, double amount) {
+            foreach (Savings each in savingAccounts.getAllSavingAccounts()) {
+                if (each.getPinNumber() == pin) {
+                    each.setAccountBalance(each.getAccountBalance() - amount);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public Boolean depositChecking(string pin, double amount) {
+            foreach(Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                if(each.getPinNumber() == pin) {
+                    each.setAccountBalance(amount + each.getAccountBalance());
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public Boolean depositSavings(string pin, double amount) {
+            foreach (Savings each in savingAccounts.getAllSavingAccounts()) {
+                if (each.getPinNumber() == pin) {
+                    each.setAccountBalance(amount + each.getAccountBalance());
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public Boolean payBill(string pin, double amount) {
+            foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                if (each.getPinNumber() == pin) {
+                    each.setAccountBalance(each.getAccountBalance() - amount);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public void transferFunds(string pin, double amount, string accountType) {
+
+        }
+        public void displayAccountBalance() {
+            Console.WriteLine("Your current balance is: " + currentBalance);
+        }
+        public Boolean readCustomers() {
+
+
             try {
                 String[] lines = File.ReadAllLines("C:\\Users\\Farzad\\source\\repos\\CDICollegeATMMachine\\Customers.txt");
 
@@ -27,73 +97,82 @@ namespace CDICollegeATMMachine
                     String[] each = lines[i].Split(',');
                     AddCustomer.setName(each[0]);
                     AddCustomer.setPinNumber(each[1]);
-                    customerList.Add(AddCustomer);
+                    customers.addCustomer(AddCustomer);
                 }
 
             } catch (IOException e) {
                 Console.Write("There was an error when loading the file");
             }
-            return customerList;
-            //for (int i = 0; i < 5; i++) {       
-            //    for (int j = 0; j < 2; j++) {
-            //        Console.Write(customers[i, j]);
-            //    }
-            //    Console.WriteLine();
-            //}
-        }
-
-
-
-
-        public Boolean validateUser(string name, int PinNumber)
-        {
 
             return true;
         }
+        public Boolean readAccounts() {
 
-        public Boolean WithdrawChecking(int PIN, double amount)
-        {
-            return true;
-        }
+            //int accountsCounter = checkingAccounts.getAllCheckingAccounts().Count + savingAccounts.getAllSavingAccounts().Count + 1;
 
-        public Boolean WithdrawSavings(int PIN, double amount)
-        {
-            return true;
-        }
-        public Boolean DepositChecking(int PIN, double amount)
-        {
-            return true;
-        }
-        public Boolean DepositSavings(int PIN, double amount)
-        {
-            return true;
-        }
-        public Boolean PayBill(int PIN, double amount)
-        {
-            return true;
-        }
-        public void TransferFunds(int pin, string amount, string accountType)
-        {
+            try {
+                String[] lines = File.ReadAllLines("C:\\Users\\Farzad\\source\\repos\\CDICollegeATMMachine\\AccountsCopy.txt");
 
-        }
+                for (int i = 0; i < 11; i++) {
+                    String[] each = lines[i].Split(',');
 
-        public void DisplayAccountBalance()
-        {
-            Console.WriteLine("Your current balance is: " + currentBalance);
-        }
-        public Boolean ReadCustomers()
-        {
+                    if (each[0] == "B") {
+                        bank = new Bank();
+
+                        bank.setPinNumber(each[1]);
+                        bank.setAccountNumber(each[2]);
+                        bank.setAccountBalance(Convert.ToDouble(each[3]));
+                    } else if (each[0] == "C") {
+                        Checking aCheckingAccount = new Checking();
+
+                        aCheckingAccount.setPinNumber(each[1]);
+                        aCheckingAccount.setAccountNumber(each[2]);
+                        aCheckingAccount.setAccountBalance(Convert.ToDouble(each[3]));
+
+                        checkingAccounts.addChecking(aCheckingAccount);
+
+                    } else if (each[0] == "S") {
+
+                        Savings aSavingAccount = new Savings();
+
+                        aSavingAccount.setPinNumber(each[1]);
+                        aSavingAccount.setAccountNumber(each[2]);
+                        aSavingAccount.setAccountBalance(Convert.ToDouble(each[3]));
+
+                        savingAccounts.addSavings(aSavingAccount);
+                    }
+                }
+            } catch (IOException e) {
+                Console.Write("There was an error when loading the file");
+            }
+
             return true;
+        }
+        public Boolean WriteAccounts() {
+
             
-        }
-        public Boolean ReadAccounts()
-        {
-            return true;
-        }
-        public Boolean WriteAccounts()
-        {
-            return true;
-        }
 
+            using (StreamWriter file = new StreamWriter("C:\\Users\\Farzad\\source\\repos\\CDICollegeATMMachine\\AccountsCopy.txt")) {
+                file.Flush();
+
+                file.WriteLine("B," + bank.getPinNumber() + "," + bank.getAccountNumber() + "," + bank.getAccountBalance());
+
+                foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                    file.WriteLine("C," + each.getPinNumber() + "," + each.getAccountNumber() + "," + each.getAccountBalance());
+                }
+
+                foreach (Savings each in savingAccounts.getAllSavingAccounts()) {
+                    file.WriteLine("S," + each.getPinNumber() + "," + each.getAccountNumber() + "," + each.getAccountBalance());
+                }
+            }
+
+            return true;
+        }
+        public CheckingAccounts getCheckingAccount() {
+            return checkingAccounts;
+        }
+        public SavingAccounts getSavingAccounts() {
+            return savingAccounts;
+        }
     }
 }
