@@ -52,6 +52,12 @@
             this.CheckingRadio = new System.Windows.Forms.RadioButton();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.BalanceTxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Checkingtxt = new System.Windows.Forms.TextBox();
+            this.Savingtxt = new System.Windows.Forms.TextBox();
             this.KeyPadGB.SuspendLayout();
             this.SelectTransaction.SuspendLayout();
             this.SelectAccount.SuspendLayout();
@@ -302,6 +308,7 @@
             this.CheckingRadio.TabStop = true;
             this.CheckingRadio.Text = "Checking";
             this.CheckingRadio.UseVisualStyleBackColor = true;
+            this.CheckingRadio.CheckedChanged += new System.EventHandler(this.CheckingRadio_CheckedChanged);
             // 
             // SubmitButton
             // 
@@ -313,6 +320,7 @@
             this.SubmitButton.TabIndex = 15;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = false;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // CloseButton
             // 
@@ -326,11 +334,71 @@
             this.CloseButton.UseVisualStyleBackColor = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(492, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(106, 15);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Current Balance: ";
+            // 
+            // BalanceTxt
+            // 
+            this.BalanceTxt.Location = new System.Drawing.Point(604, 77);
+            this.BalanceTxt.Name = "BalanceTxt";
+            this.BalanceTxt.Size = new System.Drawing.Size(163, 20);
+            this.BalanceTxt.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label1.Location = new System.Drawing.Point(492, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 15);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Checking Balance:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label3.Location = new System.Drawing.Point(494, 161);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 15);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Saving Balance: ";
+            // 
+            // Checkingtxt
+            // 
+            this.Checkingtxt.Location = new System.Drawing.Point(604, 120);
+            this.Checkingtxt.Name = "Checkingtxt";
+            this.Checkingtxt.Size = new System.Drawing.Size(163, 20);
+            this.Checkingtxt.TabIndex = 23;
+            // 
+            // Savingtxt
+            // 
+            this.Savingtxt.Location = new System.Drawing.Point(604, 161);
+            this.Savingtxt.Name = "Savingtxt";
+            this.Savingtxt.Size = new System.Drawing.Size(163, 20);
+            this.Savingtxt.TabIndex = 24;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Savingtxt);
+            this.Controls.Add(this.Checkingtxt);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.BalanceTxt);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.SelectAccount);
@@ -345,6 +413,7 @@
             this.SelectAccount.ResumeLayout(false);
             this.SelectAccount.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -374,5 +443,11 @@
         private System.Windows.Forms.RadioButton CheckingRadio;
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox BalanceTxt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox Checkingtxt;
+        private System.Windows.Forms.TextBox Savingtxt;
     }
 }

@@ -11,12 +11,18 @@ namespace CDICollegeATMMachine
 
         private string name;
         private string pinNumber;
+        public void setName(string name) {
+            this.name = name;
+        }
 
+        public void setPinNumber(string pinNumber) {
+            this.pinNumber = pinNumber;
+        }
         public string getName()
         {
             return this.name;
         }
-        private string getPinNumber()
+        public string getPinNumber()
         {
             return this.pinNumber;
         }
