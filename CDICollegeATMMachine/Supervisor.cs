@@ -57,5 +57,17 @@ namespace CDICollegeATMMachine {
         private void button11_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + ".";
         }
+
+        private void button2_Click(object sender, EventArgs e) {
+            MessageBox.Show("The ATM is out of Service");
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            if (Convert.ToDouble(supervisorKeyPad.Text) % 5000 > 0) {
+                MessageBox.Show("The amount should be multiples of 5000", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+                MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

@@ -81,7 +81,37 @@ namespace CDICollegeATMMachine {
             return false;
         }
         public void transferFunds(string pin, double amount, string accountType) {
+            if(accountType == "C") {
+                foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                    if (each.getPinNumber() == pin) {
 
+                        each.setAccountBalance(each.getAccountBalance() - amount);
+                    }
+                }
+
+                foreach (Savings each in savingAccounts.getAllSavingAccounts()) {
+                    if (each.getPinNumber() == pin) {
+
+                        each.setAccountBalance(each.getAccountBalance() + amount);
+                    }
+                }
+            }
+
+            if(accountType == "S") {
+                foreach (Savings each in savingAccounts.getAllSavingAccounts()) {
+                    if (each.getPinNumber() == pin) {
+
+                        each.setAccountBalance(each.getAccountBalance() - amount);
+                    }
+                }
+
+                foreach (Checking each in checkingAccounts.getAllCheckingAccounts()) {
+                    if (each.getPinNumber() == pin) {
+
+                        each.setAccountBalance(each.getAccountBalance() + amount);
+                    }
+                }
+            }
         }
         public void displayAccountBalance() {
             Console.WriteLine("Your current balance is: " + currentBalance);

@@ -25,9 +25,9 @@
         private void InitializeComponent() {
             this.ClientDataGroupBox = new System.Windows.Forms.GroupBox();
             this.PayIntrestBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.RefillAtmBtn = new System.Windows.Forms.Button();
+            this.OutOfServiceBtn = new System.Windows.Forms.Button();
+            this.PrintAccountBtn = new System.Windows.Forms.Button();
             this.KeyPadGB = new System.Windows.Forms.GroupBox();
             this.KeyPadTxt = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
@@ -36,7 +36,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.supervisorKeyPad = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -52,9 +52,9 @@
             this.ClientDataGroupBox.Controls.Add(this.BankBalanceLbl);
             this.ClientDataGroupBox.Controls.Add(this.label1);
             this.ClientDataGroupBox.Controls.Add(this.KeyPadGB);
-            this.ClientDataGroupBox.Controls.Add(this.button3);
-            this.ClientDataGroupBox.Controls.Add(this.button2);
-            this.ClientDataGroupBox.Controls.Add(this.button1);
+            this.ClientDataGroupBox.Controls.Add(this.PrintAccountBtn);
+            this.ClientDataGroupBox.Controls.Add(this.OutOfServiceBtn);
+            this.ClientDataGroupBox.Controls.Add(this.RefillAtmBtn);
             this.ClientDataGroupBox.Controls.Add(this.PayIntrestBtn);
             this.ClientDataGroupBox.Location = new System.Drawing.Point(26, 22);
             this.ClientDataGroupBox.Name = "ClientDataGroupBox";
@@ -73,35 +73,37 @@
             this.PayIntrestBtn.Text = "Pay Intrest";
             this.PayIntrestBtn.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // RefillAtmBtn
             // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(15, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Refill the ATM with Money";
-            this.button1.UseVisualStyleBackColor = true;
+            this.RefillAtmBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefillAtmBtn.Location = new System.Drawing.Point(15, 74);
+            this.RefillAtmBtn.Name = "RefillAtmBtn";
+            this.RefillAtmBtn.Size = new System.Drawing.Size(186, 23);
+            this.RefillAtmBtn.TabIndex = 1;
+            this.RefillAtmBtn.Text = "Refill the ATM with Money";
+            this.RefillAtmBtn.UseVisualStyleBackColor = true;
+            this.RefillAtmBtn.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // OutOfServiceBtn
             // 
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(15, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(186, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Take the ATM out of service";
-            this.button2.UseVisualStyleBackColor = true;
+            this.OutOfServiceBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OutOfServiceBtn.Location = new System.Drawing.Point(15, 112);
+            this.OutOfServiceBtn.Name = "OutOfServiceBtn";
+            this.OutOfServiceBtn.Size = new System.Drawing.Size(186, 23);
+            this.OutOfServiceBtn.TabIndex = 2;
+            this.OutOfServiceBtn.Text = "Take the ATM out of service";
+            this.OutOfServiceBtn.UseVisualStyleBackColor = true;
+            this.OutOfServiceBtn.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // PrintAccountBtn
             // 
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(15, 150);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(186, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Print the Accounts Report";
-            this.button3.UseVisualStyleBackColor = true;
+            this.PrintAccountBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrintAccountBtn.Location = new System.Drawing.Point(15, 150);
+            this.PrintAccountBtn.Name = "PrintAccountBtn";
+            this.PrintAccountBtn.Size = new System.Drawing.Size(186, 23);
+            this.PrintAccountBtn.TabIndex = 3;
+            this.PrintAccountBtn.Text = "Print the Accounts Report";
+            this.PrintAccountBtn.UseVisualStyleBackColor = true;
             // 
             // KeyPadGB
             // 
@@ -112,7 +114,7 @@
             this.KeyPadGB.Controls.Add(this.button8);
             this.KeyPadGB.Controls.Add(this.button7);
             this.KeyPadGB.Controls.Add(this.button6);
-            this.KeyPadGB.Controls.Add(this.button5);
+            this.KeyPadGB.Controls.Add(this.supervisorKeyPad);
             this.KeyPadGB.Controls.Add(this.button4);
             this.KeyPadGB.Controls.Add(this.button12);
             this.KeyPadGB.Controls.Add(this.button13);
@@ -197,16 +199,16 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button5
+            // supervisorKeyPad
             // 
-            this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(190, 28);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(65, 30);
-            this.button5.TabIndex = 18;
-            this.button5.Text = "3";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.supervisorKeyPad.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supervisorKeyPad.Location = new System.Drawing.Point(190, 28);
+            this.supervisorKeyPad.Name = "supervisorKeyPad";
+            this.supervisorKeyPad.Size = new System.Drawing.Size(65, 30);
+            this.supervisorKeyPad.TabIndex = 18;
+            this.supervisorKeyPad.Text = "3";
+            this.supervisorKeyPad.UseVisualStyleBackColor = true;
+            this.supervisorKeyPad.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -289,9 +291,9 @@
 
         #endregion
         private System.Windows.Forms.GroupBox ClientDataGroupBox;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button PrintAccountBtn;
+        private System.Windows.Forms.Button OutOfServiceBtn;
+        private System.Windows.Forms.Button RefillAtmBtn;
         private System.Windows.Forms.Button PayIntrestBtn;
         private System.Windows.Forms.GroupBox KeyPadGB;
         private System.Windows.Forms.TextBox KeyPadTxt;
@@ -301,7 +303,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button supervisorKeyPad;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;

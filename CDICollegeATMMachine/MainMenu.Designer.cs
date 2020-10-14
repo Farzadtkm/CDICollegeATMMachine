@@ -58,9 +58,16 @@
             this.Savingtxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.FullName = new System.Windows.Forms.Label();
+            this.transferFunds = new System.Windows.Forms.GroupBox();
+            this.transferlbl = new System.Windows.Forms.Label();
+            this.tolbl = new System.Windows.Forms.Label();
+            this.fromlbl = new System.Windows.Forms.Label();
+            this.transferFundsSavingsRadio = new System.Windows.Forms.RadioButton();
+            this.transferFundsCheckingRadio = new System.Windows.Forms.RadioButton();
             this.KeyPadGB.SuspendLayout();
             this.SelectTransaction.SuspendLayout();
             this.SelectAccount.SuspendLayout();
+            this.transferFunds.SuspendLayout();
             this.SuspendLayout();
             // 
             // KeyPadGB
@@ -224,6 +231,7 @@
             this.SelectTransaction.TabIndex = 1;
             this.SelectTransaction.TabStop = false;
             this.SelectTransaction.Text = "Select Transaction";
+            this.SelectTransaction.Enter += new System.EventHandler(this.SelectTransaction_Enter);
             // 
             // PayBillRadio
             // 
@@ -236,6 +244,7 @@
             this.PayBillRadio.TabStop = true;
             this.PayBillRadio.Text = "Pay Bill";
             this.PayBillRadio.UseVisualStyleBackColor = true;
+            this.PayBillRadio.CheckedChanged += new System.EventHandler(this.PayBillRadio_CheckedChanged);
             // 
             // TransferFundsRadio
             // 
@@ -395,11 +404,83 @@
             this.FullName.Size = new System.Drawing.Size(0, 15);
             this.FullName.TabIndex = 26;
             // 
+            // transferFunds
+            // 
+            this.transferFunds.Controls.Add(this.transferlbl);
+            this.transferFunds.Controls.Add(this.tolbl);
+            this.transferFunds.Controls.Add(this.fromlbl);
+            this.transferFunds.Controls.Add(this.transferFundsSavingsRadio);
+            this.transferFunds.Controls.Add(this.transferFundsCheckingRadio);
+            this.transferFunds.Enabled = false;
+            this.transferFunds.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.transferFunds.Location = new System.Drawing.Point(448, 225);
+            this.transferFunds.Name = "transferFunds";
+            this.transferFunds.Size = new System.Drawing.Size(267, 111);
+            this.transferFunds.TabIndex = 27;
+            this.transferFunds.TabStop = false;
+            this.transferFunds.Text = "Transfer Funds";
+            this.transferFunds.KeyDown += new System.Windows.Forms.KeyEventHandler(this.transferFunds_KeyDown);
+            this.transferFunds.Enter += new System.EventHandler(this.transferFunds_Enter);
+            // 
+            // transferlbl
+            // 
+            this.transferlbl.AutoSize = true;
+            this.transferlbl.Location = new System.Drawing.Point(199, 39);
+            this.transferlbl.Name = "transferlbl";
+            this.transferlbl.Size = new System.Drawing.Size(0, 13);
+            this.transferlbl.TabIndex = 8;
+            // 
+            // tolbl
+            // 
+            this.tolbl.AutoSize = true;
+            this.tolbl.Location = new System.Drawing.Point(159, 39);
+            this.tolbl.Name = "tolbl";
+            this.tolbl.Size = new System.Drawing.Size(20, 13);
+            this.tolbl.TabIndex = 7;
+            this.tolbl.Text = "To";
+            // 
+            // fromlbl
+            // 
+            this.fromlbl.AutoSize = true;
+            this.fromlbl.Location = new System.Drawing.Point(6, 34);
+            this.fromlbl.Name = "fromlbl";
+            this.fromlbl.Size = new System.Drawing.Size(30, 13);
+            this.fromlbl.TabIndex = 6;
+            this.fromlbl.Text = "From";
+            this.fromlbl.Click += new System.EventHandler(this.fromlbl_Click);
+            // 
+            // transferFundsSavingsRadio
+            // 
+            this.transferFundsSavingsRadio.AutoSize = true;
+            this.transferFundsSavingsRadio.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferFundsSavingsRadio.Location = new System.Drawing.Point(68, 70);
+            this.transferFundsSavingsRadio.Name = "transferFundsSavingsRadio";
+            this.transferFundsSavingsRadio.Size = new System.Drawing.Size(68, 19);
+            this.transferFundsSavingsRadio.TabIndex = 5;
+            this.transferFundsSavingsRadio.Text = "Savings";
+            this.transferFundsSavingsRadio.UseVisualStyleBackColor = true;
+            this.transferFundsSavingsRadio.CheckedChanged += new System.EventHandler(this.transferFundsSavingsRadio_CheckedChanged);
+            // 
+            // transferFundsCheckingRadio
+            // 
+            this.transferFundsCheckingRadio.AutoSize = true;
+            this.transferFundsCheckingRadio.Checked = true;
+            this.transferFundsCheckingRadio.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferFundsCheckingRadio.Location = new System.Drawing.Point(68, 35);
+            this.transferFundsCheckingRadio.Name = "transferFundsCheckingRadio";
+            this.transferFundsCheckingRadio.Size = new System.Drawing.Size(79, 19);
+            this.transferFundsCheckingRadio.TabIndex = 4;
+            this.transferFundsCheckingRadio.TabStop = true;
+            this.transferFundsCheckingRadio.Text = "Checking";
+            this.transferFundsCheckingRadio.UseVisualStyleBackColor = true;
+            this.transferFundsCheckingRadio.CheckedChanged += new System.EventHandler(this.transferFundsCheckingRadio_CheckedChanged);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.transferFunds);
             this.Controls.Add(this.FullName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Savingtxt);
@@ -419,6 +500,8 @@
             this.SelectTransaction.PerformLayout();
             this.SelectAccount.ResumeLayout(false);
             this.SelectAccount.PerformLayout();
+            this.transferFunds.ResumeLayout(false);
+            this.transferFunds.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +539,12 @@
         private System.Windows.Forms.TextBox Savingtxt;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label FullName;
+        private System.Windows.Forms.GroupBox transferFunds;
+        private System.Windows.Forms.KeyEventHandler keyDown;
+        private System.Windows.Forms.Label fromlbl;
+        private System.Windows.Forms.RadioButton transferFundsSavingsRadio;
+        private System.Windows.Forms.RadioButton transferFundsCheckingRadio;
+        private System.Windows.Forms.Label transferlbl;
+        private System.Windows.Forms.Label tolbl;
     }
 }

@@ -38,6 +38,9 @@ namespace CDICollegeATMMachine {
                     this.userSaving = each;
             }
 
+            Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
+            Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
+
         }
 
         public void readAccoounts() {
@@ -97,16 +100,14 @@ namespace CDICollegeATMMachine {
 
         private void SubmitButton_Click(object sender, EventArgs e) {
 
-
-
-            if(CheckingRadio.Checked == true && DepositRadio.Checked == true) {
+            if (CheckingRadio.Checked == true && DepositRadio.Checked == true) {
                 atmManager.depositChecking(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
             }
 
-            if(SavingRadio.Checked == true && DepositRadio.Checked == true) {
+            if (SavingRadio.Checked == true && DepositRadio.Checked == true) {
                 atmManager.depositSavings(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
             }
-            
+
 
             //    if (CheckingRadio.Checked == true && WithdrawalRadio.Checked == true) { 
             //    if(Convert.ToDouble(KeyPadTxt.Text) > 1000)
@@ -145,29 +146,64 @@ namespace CDICollegeATMMachine {
                     atmManager.payBill(pinNumber, Convert.ToDouble(KeyPadTxt.Text));
             }
 
+            if (transferFundsCheckingRadio.Checked == true && TransferFundsRadio.Checked == true) {
+                
+
+                if (Convert.ToDouble(KeyPadTxt.Text) > 100000)
+                    MessageBox.Show("The amount is more than a hundred thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (userChecking.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
+                    MessageBox.Show("The amount cannot be more than the amount in the account.", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    atmManager.transferFunds(pinNumber, Convert.ToDouble(KeyPadTxt.Text), "C");
+            }
+
+            if (transferFundsSavingsRadio.Checked == true && TransferFundsRadio.Checked == true) {
+                
+
+                if (Convert.ToDouble(KeyPadTxt.Text) > 100000)
+                    MessageBox.Show("The amount is more than a hundred thousand dollars", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+                    MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (userSaving.getAccountBalance() < Convert.ToDouble(KeyPadTxt.Text))
+                    MessageBox.Show("The amount cannot be more than the amount in the account.", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    atmManager.transferFunds(pinNumber, Convert.ToDouble(KeyPadTxt.Text), "S");
+
+            }
+
             if (SavingRadio.Checked == true && PayBillRadio.Checked == true) {
                 MessageBox.Show("Paying a bill is only available from checking", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-                atmManager.WriteAccounts();
+
+
+
+            atmManager.WriteAccounts();
         }
 
         private void CheckingRadio_CheckedChanged(object sender, EventArgs e) {
             if (CheckingRadio.Checked == true) {
                 Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
+                Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
 
                 //foreach(Checking each in atmManager.getCheckingAccount().getAllCheckingAccounts()) {
                 //    if (pinNumber == each.getPinNumber())
                 //        Checkingtxt.Text = Convert.ToString(each.getAccountBalance());
                 //}
-            }          
+            }
         }
 
         private void DepositRadio_CheckedChanged(object sender, EventArgs e) {
-            
+            if (DepositRadio.Checked == true) {
+                SelectAccount.Enabled = true;
+                transferFunds.Enabled = false;
+            }
         }
 
         private void SavingRadio_CheckedChanged(object sender, EventArgs e) {
             if (SavingRadio.Checked == true) {
+                Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
                 Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
 
                 //foreach (Savings each in atmManager.getSavingAccounts().getAllSavingAccounts()) {
@@ -178,12 +214,58 @@ namespace CDICollegeATMMachine {
         }
 
         private void WithdrawalRadio_CheckedChanged(object sender, EventArgs e) {
-
+            if (WithdrawalRadio.Checked == true) {
+                SelectAccount.Enabled = true;
+                transferFunds.Enabled = false;
+            }
         }
 
 
         private void TransferFundsRadio_CheckedChanged(object sender, EventArgs e) {
-            
+            if (TransferFundsRadio.Checked == true) {
+                SelectAccount.Enabled = false;
+                transferFunds.Enabled = true;
+            }
+        }
+
+        private void fromlbl_Click(object sender, EventArgs e) {
+
+        }
+
+        private void SelectTransaction_Enter(object sender, EventArgs e) {
+
+        }
+
+        private void transferFunds_KeyDown(object sender, EventArgs e) {
+
+        }
+
+        private void transferFundsSavingsRadio_CheckedChanged(object sender, EventArgs e) {
+            if (transferFundsSavingsRadio.Checked == true) {
+                Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
+                Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
+                transferlbl.Text = "Checking";
+            }
+                
+        }
+
+        private void transferFundsCheckingRadio_CheckedChanged(object sender, EventArgs e) {
+            if (transferFundsCheckingRadio.Checked == true) {
+                Checkingtxt.Text = Convert.ToString(userChecking.getAccountBalance());
+                Savingtxt.Text = Convert.ToString(userSaving.getAccountBalance());
+                transferlbl.Text = "Savings";
+            }               
+        }
+
+        private void transferFunds_Enter(object sender, EventArgs e) {
+
+        }
+
+        private void PayBillRadio_CheckedChanged(object sender, EventArgs e) {
+            if (PayBillRadio.Checked == true) {
+                SelectAccount.Enabled = true;
+                transferFunds.Enabled = false;
+            }
         }
 
         //private void MainMenu_Load(object sender, System.EventArgs e) {

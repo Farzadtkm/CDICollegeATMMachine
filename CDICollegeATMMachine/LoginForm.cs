@@ -80,11 +80,18 @@ namespace CDICollegeATMMachine {
 
             atmManager.readAccounts();
             atmManager.readCustomers();
+            if (user == "Supervisor" && pass == "0000") {
+                this.Hide();
+                Supervisor supervisor = new Supervisor();
+                supervisor.Show();
 
-            if (atmManager.validateUser(user, pass)) {
+                return;
+            }
+            else if (atmManager.validateUser(user, pass)) {
                 this.Hide();
                 MainMenu mainMenu = new MainMenu(user, pass, atmManager);
                 mainMenu.Show();
+
                 return;
             }
             
