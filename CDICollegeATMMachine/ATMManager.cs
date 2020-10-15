@@ -13,8 +13,12 @@ namespace CDICollegeATMMachine {
         private SavingAccounts savingAccounts = new SavingAccounts();
         private CheckingAccounts checkingAccounts = new CheckingAccounts();
 
+        private Boolean outofService = false;
+
         private double currentBalance;
 
+
+        
         public Boolean validateUser(string name, string pin) {
             
             for(int i = 0; i < 5; i++) {
@@ -204,5 +208,15 @@ namespace CDICollegeATMMachine {
         public SavingAccounts getSavingAccounts() {
             return savingAccounts;
         }
+        public Bank getBank() {
+            return this.bank;
+        }
+        public Boolean getOutOfService() {
+            return this.outofService;
+        }
+        public void setOutOfService(Boolean outofService) {
+            this.outofService = outofService;
+        }
     }
+
 }

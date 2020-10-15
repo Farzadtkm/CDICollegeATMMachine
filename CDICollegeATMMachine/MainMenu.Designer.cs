@@ -64,6 +64,7 @@
             this.fromlbl = new System.Windows.Forms.Label();
             this.transferFundsSavingsRadio = new System.Windows.Forms.RadioButton();
             this.transferFundsCheckingRadio = new System.Windows.Forms.RadioButton();
+            this.ExitTheATM = new System.Windows.Forms.Button();
             this.KeyPadGB.SuspendLayout();
             this.SelectTransaction.SuspendLayout();
             this.SelectAccount.SuspendLayout();
@@ -341,9 +342,9 @@
             this.CloseButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseButton.Location = new System.Drawing.Point(125, 357);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(87, 30);
+            this.CloseButton.Size = new System.Drawing.Size(141, 30);
             this.CloseButton.TabIndex = 16;
-            this.CloseButton.Text = "Close";
+            this.CloseButton.Text = "Login Form";
             this.CloseButton.UseVisualStyleBackColor = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
@@ -475,11 +476,24 @@
             this.transferFundsCheckingRadio.UseVisualStyleBackColor = true;
             this.transferFundsCheckingRadio.CheckedChanged += new System.EventHandler(this.transferFundsCheckingRadio_CheckedChanged);
             // 
+            // ExitTheATM
+            // 
+            this.ExitTheATM.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.ExitTheATM.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitTheATM.Location = new System.Drawing.Point(629, 357);
+            this.ExitTheATM.Name = "ExitTheATM";
+            this.ExitTheATM.Size = new System.Drawing.Size(86, 30);
+            this.ExitTheATM.TabIndex = 28;
+            this.ExitTheATM.Text = "EXIT";
+            this.ExitTheATM.UseVisualStyleBackColor = false;
+            this.ExitTheATM.Click += new System.EventHandler(this.ExitTheATM_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ExitTheATM);
             this.Controls.Add(this.transferFunds);
             this.Controls.Add(this.FullName);
             this.Controls.Add(this.label4);
@@ -546,5 +560,6 @@
         private System.Windows.Forms.RadioButton transferFundsCheckingRadio;
         private System.Windows.Forms.Label transferlbl;
         private System.Windows.Forms.Label tolbl;
+        private System.Windows.Forms.Button ExitTheATM;
     }
 }

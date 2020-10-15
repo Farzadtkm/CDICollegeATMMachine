@@ -10,10 +10,17 @@ using System.Windows.Forms;
 
 namespace CDICollegeATMMachine {
     public partial class Supervisor : Form {
-        public Supervisor() {
-            InitializeComponent();
-        }
 
+        ATMManager atmManager;
+        LoginForm loginForm;
+
+        public Supervisor(ATMManager atmManager, LoginForm loginForm) {
+            InitializeComponent();
+
+            this.atmManager = atmManager;
+            this.loginForm = loginForm;
+        }
+        Bank bank = new Bank();
         private void button14_Click(object sender, EventArgs e) {
             KeyPadTxt.Text = KeyPadTxt.Text + "1";
         }
@@ -59,15 +66,38 @@ namespace CDICollegeATMMachine {
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            MessageBox.Show("The ATM is out of Service");
-            this.Close();
+            if(atmManager.getOutOfService() == false)
+                MessageBox.Show("The ATM is out of Service");
+            else
+                MessageBox.Show("The ATM is back to Service");
+
+            atmManager.setOutOfService(!atmManager.getOutOfService());
+
+
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            if (Convert.ToDouble(supervisorKeyPad.Text) % 5000 > 0) {
+            if (Convert.ToDouble(supervisorKeyPad.Text) % 5000 > 0)
                 MessageBox.Show("The amount should be multiples of 5000", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
+            else if (Convert.ToDouble(KeyPadTxt.Text) < 0)
                 MessageBox.Show("The amount cannot be less than zero", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (Convert.ToDouble(KeyPadTxt.Text) + atmManager.getBank().getAccountBalance() > 20000)
+                MessageBox.Show("The amount inside the account cannot be more than $20000", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                atmManager.getBank().refillATM(Convert.ToDouble(supervisorKeyPad.Text));
+
+            BankBalanceLbl.Text = Convert.ToString(atmManager.getBank().getAccountBalance());
+            
+
+        }
+
+        private void BankBalanceLbl_Click(object sender, EventArgs e) {
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e) {
+            this.Hide();
+            loginForm.Show();
         }
     }
 }

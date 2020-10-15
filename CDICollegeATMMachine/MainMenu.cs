@@ -51,7 +51,9 @@ namespace CDICollegeATMMachine {
 
         }
         private void CloseButton_Click(object sender, EventArgs e) {
-            this.Close();
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
         }
 
         private void Button1_Click(object sender, EventArgs e) {
@@ -266,6 +268,10 @@ namespace CDICollegeATMMachine {
                 SelectAccount.Enabled = true;
                 transferFunds.Enabled = false;
             }
+        }
+
+        private void ExitTheATM_Click(object sender, EventArgs e) {
+            this.Close();
         }
 
         //private void MainMenu_Load(object sender, System.EventArgs e) {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 
 namespace CDICollegeATMMachine {
-    public partial class SignInForm : Form {
+    public partial class LoginForm : Form {
 
         ATMManager atmManger;
         private string pinNumber;
@@ -21,14 +21,14 @@ namespace CDICollegeATMMachine {
         public static String user;
         public static String pass;
 
-        public SignInForm() {
+        public LoginForm() {
             InitializeComponent();
         }
 
 
         private void Button1_Click(object sender, EventArgs e) {
             Passwordtxt.Text = Passwordtxt.Text + "1";
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -82,19 +82,22 @@ namespace CDICollegeATMMachine {
             atmManager.readCustomers();
             if (user == "Supervisor" && pass == "0000") {
                 this.Hide();
-                Supervisor supervisor = new Supervisor();
+                Supervisor supervisor = new Supervisor(atmManager, this);
                 supervisor.Show();
 
                 return;
-            }
-            else if (atmManager.validateUser(user, pass)) {
-                this.Hide();
-                MainMenu mainMenu = new MainMenu(user, pass, atmManager);
-                mainMenu.Show();
+            } else if (atmManager.getOutOfService() == true) {
+                MessageBox.Show("The ATM is out of service", "Wrong Inputs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else if (atmManager.getOutOfService() == false) {
+                if (atmManager.validateUser(user, pass)) {
+                    this.Hide();
+                    MainMenu mainMenu = new MainMenu(user, pass, atmManager);
+                    mainMenu.Show();
 
-                return;
+                    return;
+                }
             }
-            
+
             attempt++;
             if (attempt < 3) {
                 MessageBox.Show("The User Name or PIN is Inccorect you have " + (3 - attempt) + " attempt more");

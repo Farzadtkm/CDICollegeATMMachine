@@ -1,6 +1,6 @@
 ﻿namespace CDICollegeATMMachine
 {
-    partial class SignInForm
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -245,13 +245,13 @@
             this.UserName.TabIndex = 0;
             this.UserName.Text = "User Name: ";
             // 
-            // SignInForm
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 493);
             this.Controls.Add(this.SignIN);
-            this.Name = "SignInForm";
+            this.Name = "LoginForm";
             this.Text = "Sign In";
             this.SignIN.ResumeLayout(false);
             this.SignIN.PerformLayout();

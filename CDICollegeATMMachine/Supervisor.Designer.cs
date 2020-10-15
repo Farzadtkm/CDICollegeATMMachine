@@ -24,10 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.ClientDataGroupBox = new System.Windows.Forms.GroupBox();
-            this.PayIntrestBtn = new System.Windows.Forms.Button();
-            this.RefillAtmBtn = new System.Windows.Forms.Button();
-            this.OutOfServiceBtn = new System.Windows.Forms.Button();
-            this.PrintAccountBtn = new System.Windows.Forms.Button();
+            this.BankBalanceLbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.KeyPadGB = new System.Windows.Forms.GroupBox();
             this.KeyPadTxt = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
@@ -41,14 +39,18 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.BankBalanceLbl = new System.Windows.Forms.Label();
+            this.PrintAccountBtn = new System.Windows.Forms.Button();
+            this.OutOfServiceBtn = new System.Windows.Forms.Button();
+            this.RefillAtmBtn = new System.Windows.Forms.Button();
+            this.PayIntrestBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.ClientDataGroupBox.SuspendLayout();
             this.KeyPadGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // ClientDataGroupBox
             // 
+            this.ClientDataGroupBox.Controls.Add(this.button1);
             this.ClientDataGroupBox.Controls.Add(this.BankBalanceLbl);
             this.ClientDataGroupBox.Controls.Add(this.label1);
             this.ClientDataGroupBox.Controls.Add(this.KeyPadGB);
@@ -63,47 +65,24 @@
             this.ClientDataGroupBox.TabStop = false;
             this.ClientDataGroupBox.Text = "Supervisor Menu";
             // 
-            // PayIntrestBtn
+            // BankBalanceLbl
             // 
-            this.PayIntrestBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PayIntrestBtn.Location = new System.Drawing.Point(15, 35);
-            this.PayIntrestBtn.Name = "PayIntrestBtn";
-            this.PayIntrestBtn.Size = new System.Drawing.Size(186, 23);
-            this.PayIntrestBtn.TabIndex = 0;
-            this.PayIntrestBtn.Text = "Pay Intrest";
-            this.PayIntrestBtn.UseVisualStyleBackColor = true;
+            this.BankBalanceLbl.AutoSize = true;
+            this.BankBalanceLbl.Location = new System.Drawing.Point(169, 262);
+            this.BankBalanceLbl.Name = "BankBalanceLbl";
+            this.BankBalanceLbl.Size = new System.Drawing.Size(0, 13);
+            this.BankBalanceLbl.TabIndex = 6;
+            this.BankBalanceLbl.Click += new System.EventHandler(this.BankBalanceLbl_Click);
             // 
-            // RefillAtmBtn
+            // label1
             // 
-            this.RefillAtmBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RefillAtmBtn.Location = new System.Drawing.Point(15, 74);
-            this.RefillAtmBtn.Name = "RefillAtmBtn";
-            this.RefillAtmBtn.Size = new System.Drawing.Size(186, 23);
-            this.RefillAtmBtn.TabIndex = 1;
-            this.RefillAtmBtn.Text = "Refill the ATM with Money";
-            this.RefillAtmBtn.UseVisualStyleBackColor = true;
-            this.RefillAtmBtn.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // OutOfServiceBtn
-            // 
-            this.OutOfServiceBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OutOfServiceBtn.Location = new System.Drawing.Point(15, 112);
-            this.OutOfServiceBtn.Name = "OutOfServiceBtn";
-            this.OutOfServiceBtn.Size = new System.Drawing.Size(186, 23);
-            this.OutOfServiceBtn.TabIndex = 2;
-            this.OutOfServiceBtn.Text = "Take the ATM out of service";
-            this.OutOfServiceBtn.UseVisualStyleBackColor = true;
-            this.OutOfServiceBtn.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // PrintAccountBtn
-            // 
-            this.PrintAccountBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrintAccountBtn.Location = new System.Drawing.Point(15, 150);
-            this.PrintAccountBtn.Name = "PrintAccountBtn";
-            this.PrintAccountBtn.Size = new System.Drawing.Size(186, 23);
-            this.PrintAccountBtn.TabIndex = 3;
-            this.PrintAccountBtn.Text = "Print the Accounts Report";
-            this.PrintAccountBtn.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 257);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 19);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Bank ATM Balance: ";
             // 
             // KeyPadGB
             // 
@@ -254,24 +233,57 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // label1
+            // PrintAccountBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 257);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Bank ATM Balance: ";
+            this.PrintAccountBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrintAccountBtn.Location = new System.Drawing.Point(15, 150);
+            this.PrintAccountBtn.Name = "PrintAccountBtn";
+            this.PrintAccountBtn.Size = new System.Drawing.Size(186, 23);
+            this.PrintAccountBtn.TabIndex = 3;
+            this.PrintAccountBtn.Text = "Print the Accounts Report";
+            this.PrintAccountBtn.UseVisualStyleBackColor = true;
             // 
-            // BankBalanceLbl
+            // OutOfServiceBtn
             // 
-            this.BankBalanceLbl.AutoSize = true;
-            this.BankBalanceLbl.Location = new System.Drawing.Point(169, 262);
-            this.BankBalanceLbl.Name = "BankBalanceLbl";
-            this.BankBalanceLbl.Size = new System.Drawing.Size(35, 13);
-            this.BankBalanceLbl.TabIndex = 6;
-            this.BankBalanceLbl.Text = "label2";
+            this.OutOfServiceBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OutOfServiceBtn.Location = new System.Drawing.Point(15, 112);
+            this.OutOfServiceBtn.Name = "OutOfServiceBtn";
+            this.OutOfServiceBtn.Size = new System.Drawing.Size(186, 23);
+            this.OutOfServiceBtn.TabIndex = 2;
+            this.OutOfServiceBtn.Text = "Take the ATM out of service";
+            this.OutOfServiceBtn.UseVisualStyleBackColor = true;
+            this.OutOfServiceBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // RefillAtmBtn
+            // 
+            this.RefillAtmBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefillAtmBtn.Location = new System.Drawing.Point(15, 74);
+            this.RefillAtmBtn.Name = "RefillAtmBtn";
+            this.RefillAtmBtn.Size = new System.Drawing.Size(186, 23);
+            this.RefillAtmBtn.TabIndex = 1;
+            this.RefillAtmBtn.Text = "Refill the ATM with Money";
+            this.RefillAtmBtn.UseVisualStyleBackColor = true;
+            this.RefillAtmBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // PayIntrestBtn
+            // 
+            this.PayIntrestBtn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PayIntrestBtn.Location = new System.Drawing.Point(15, 35);
+            this.PayIntrestBtn.Name = "PayIntrestBtn";
+            this.PayIntrestBtn.Size = new System.Drawing.Size(186, 23);
+            this.PayIntrestBtn.TabIndex = 0;
+            this.PayIntrestBtn.Text = "Pay Intrest";
+            this.PayIntrestBtn.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(15, 344);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Exit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Supervisor
             // 
@@ -310,5 +322,6 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label BankBalanceLbl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
