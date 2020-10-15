@@ -274,6 +274,7 @@
             this.PayIntrestBtn.TabIndex = 0;
             this.PayIntrestBtn.Text = "Pay Intrest";
             this.PayIntrestBtn.UseVisualStyleBackColor = true;
+            this.PayIntrestBtn.Click += new System.EventHandler(this.PayIntrestBtn_Click);
             // 
             // button1
             // 

@@ -13,7 +13,7 @@ using System.IO;
 namespace CDICollegeATMMachine {
     public partial class LoginForm : Form {
 
-        ATMManager atmManger;
+        private ATMManager atmManager;
         private string pinNumber;
         private double amount;
         private Boolean readAccounts;
@@ -23,6 +23,7 @@ namespace CDICollegeATMMachine {
 
         public LoginForm() {
             InitializeComponent();
+            this.atmManager = new ATMManager();
         }
 
 
@@ -73,8 +74,6 @@ namespace CDICollegeATMMachine {
 
         private void LogIn_Click(object sender, EventArgs e) {
 
-            ATMManager atmManager = new ATMManager();
-
             user = UserNameTxt.Text;
             pass = Passwordtxt.Text;
 
@@ -88,6 +87,8 @@ namespace CDICollegeATMMachine {
                 return;
             } else if (atmManager.getOutOfService() == true) {
                 MessageBox.Show("The ATM is out of service", "Wrong Inputs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
             } else if (atmManager.getOutOfService() == false) {
                 if (atmManager.validateUser(user, pass)) {
                     this.Hide();
@@ -129,8 +130,5 @@ namespace CDICollegeATMMachine {
 
         }
 
-        private void Passwordtxt_TextChanged(object sender, EventArgs e) {
-
-        }
     }
 }

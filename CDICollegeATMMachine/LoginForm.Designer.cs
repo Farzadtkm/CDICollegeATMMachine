@@ -216,7 +216,6 @@
             this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(125, 20);
             this.Passwordtxt.TabIndex = 3;
-            this.Passwordtxt.TextChanged += new System.EventHandler(this.Passwordtxt_TextChanged);
             // 
             // UserNameTxt
             // 

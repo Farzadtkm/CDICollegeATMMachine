@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace CDICollegeATMMachine {
     public class Savings : Account {
 
-        private double intrestRate;
-        public double payIntrest() {
-            return intrestRate * 1.45;
+        private double intrestRate = 0.01;
+        public void payIntrest() {
+            this.setAccountBalance(this.getAccountBalance() * intrestRate / 365 / 100);
         }
     }
 }

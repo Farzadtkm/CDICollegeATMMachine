@@ -66,7 +66,7 @@ namespace CDICollegeATMMachine {
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            if(atmManager.getOutOfService() == false)
+            if (atmManager.getOutOfService() == false)
                 MessageBox.Show("The ATM is out of Service");
             else
                 MessageBox.Show("The ATM is back to Service");
@@ -87,17 +87,24 @@ namespace CDICollegeATMMachine {
                 atmManager.getBank().refillATM(Convert.ToDouble(supervisorKeyPad.Text));
 
             BankBalanceLbl.Text = Convert.ToString(atmManager.getBank().getAccountBalance());
-            
+
 
         }
 
         private void BankBalanceLbl_Click(object sender, EventArgs e) {
-            
+
         }
 
         private void button1_Click_1(object sender, EventArgs e) {
             this.Hide();
             loginForm.Show();
+        }
+
+        private void PayIntrestBtn_Click(object sender, EventArgs e) {
+            foreach (Savings each in atmManager.getSavingAccounts().getAllSavingAccounts()) 
+                each.payIntrest();
+
+            MessageBox.Show("The interest of %1 has been applied to all savings accounts!");
         }
     }
 }
